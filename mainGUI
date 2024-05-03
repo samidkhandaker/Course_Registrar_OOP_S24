@@ -1,0 +1,76 @@
+package OOPPROJECT;
+
+import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+public class mainGUI extends JFrame{
+	//private JPanel contentPane;
+	//private JTextField id;
+	//private JTextField password;
+	private JTextField idField;
+	private JTextField passwordField;
+	private JLabel idLabel, passwordLabel;
+	public ArrayList<Administrator> admins=new ArrayList<Administrator>();
+	public ArrayList<Student> students=new ArrayList<Student>();
+	public ArrayList<Courses> courses=new ArrayList<Courses>();
+	public mainGUI(){
+		Administrator superadmin=new Administrator("superadmin","0","123");
+		admins.add(superadmin);
+		setTitle("Login");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        idLabel = new JLabel("ID:");
+        passwordLabel = new JLabel("Password:");
+
+        idField = new JTextField(15);
+        passwordField = new JPasswordField(15);
+
+        JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(e -> {
+        	boolean isadmin=false;
+        	boolean isstudent=false;
+            String id = idField.getText();
+            String password = passwordField.getText();
+            for(Administrator admin: admins) {
+            	if(admin.getID().equals(id)) {
+            		if(admin.getPassword().equals(password)) {
+            			isadmin=true;
+            			this.dispose();
+            			new adminGUI(courses);
+            			//ad.show();
+            		}
+            	}
+            }
+            if(!isadmin) {
+            	for(Student stud: students) {
+                	if(stud.getID().equals(id)) {
+                		if(stud.getPassword().equals(password)) {
+                			isstudent=true;
+                		}
+                	
+            }
+            	}
+            }
+            if(!isadmin && !isstudent) {
+            	idField.setText("");
+            	passwordField.setText("");
+            }
+            
+        });
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2));
+        panel.add(idLabel);
+        panel.add(idField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(new JLabel()); // empty label for spacing
+        panel.add(loginButton);
+
+        add(panel);
+
+        setVisible(true);
+    }
+}
