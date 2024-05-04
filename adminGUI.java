@@ -18,7 +18,7 @@ public class adminGUI extends JFrame{
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 1));
 
-        JButton addClassButton = new JButton("Add Class");
+        JButton addClassButton = new JButton("Add Course");
         JButton updateGradesButton = new JButton("Update Grades");
         JButton addStudentButton = new JButton("Add Student");
         JButton editProfileButton = new JButton("Edit Profile");
@@ -58,7 +58,7 @@ public class adminGUI extends JFrame{
                         break;
                     }
                 }
-                dispose();
+              //  dispose();
             }
         });
 
