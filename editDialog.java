@@ -33,6 +33,13 @@ public class editDialog extends JDialog{
                 dispose(); // Close the dialog
             }
         });
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the dialog
+            }
+        });
 
         panel.add(nameLabel);
         panel.add(nameField);
@@ -40,7 +47,8 @@ public class editDialog extends JDialog{
         panel.add(passwordField);
         panel.add(infoLabel); // Info label for instructions
         panel.add(new JLabel()); // Empty label for spacing
-        panel.add(new JLabel()); // Empty label for spacing
+       // panel.add(new JLabel()); // Empty label for spacing
+        panel.add(cancelButton);
         panel.add(saveButton);
 
         add(panel);
