@@ -17,7 +17,7 @@ public class updateGradesGUI extends JFrame{
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2));
+        panel.setLayout(new GridLayout(5, 2));
 
         JLabel studentLabel = new JLabel("Select Student:");
         JLabel courseLabel = new JLabel("Select Course:");
@@ -69,6 +69,13 @@ public class updateGradesGUI extends JFrame{
                 gradeField.setText("");
             }
         });
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
 
         panel.add(studentLabel);
         panel.add(studentComboBox);
@@ -76,8 +83,9 @@ public class updateGradesGUI extends JFrame{
         panel.add(courseComboBox);
         panel.add(gradeLabel);
         panel.add(gradeField);
-        panel.add(new JLabel()); // empty label for spacing
+        panel.add(new JLabel()); 
         panel.add(saveButton);
+        panel.add(cancelButton);
 
         add(panel);
         setVisible(true);
