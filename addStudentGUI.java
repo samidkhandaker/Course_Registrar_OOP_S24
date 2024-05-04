@@ -43,6 +43,13 @@ public class addStudentGUI extends JFrame {
                 dispose();
             }
         });
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the dialog
+            }
+        });
 
         panel.add(idLabel);
         panel.add(idField);
@@ -52,7 +59,7 @@ public class addStudentGUI extends JFrame {
         panel.add(nameField);
         panel.add(yearLabel);
         panel.add(yearComboBox);
-        panel.add(new JLabel()); // empty label for spacing
+        panel.add(cancelButton); // empty label for spacing
         panel.add(addButton);
 
         add(panel);
