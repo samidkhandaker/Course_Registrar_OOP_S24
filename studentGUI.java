@@ -45,6 +45,7 @@ public class studentGUI extends JFrame{
                     String newPassword = editDialog.getEditedPassword();
                            if(!newName.isEmpty()) {
                                student.setName(newName);
+				nameLabel.setText("Name: " + student.getName());
                         }
                            if(!newPassword.isEmpty()) {
                                student.setPassword(newPassword);
