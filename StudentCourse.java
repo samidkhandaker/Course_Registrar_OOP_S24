@@ -1,17 +1,22 @@
 package OOPPROJECT;
 
-import java.util.ArrayList;
-
-public class StudentCourse extends Courses{
+public class StudentCourse{
+	public String name;
 	public String grade;
-	public StudentCourse(String name, String symbol, int credit, int capacity,String time, ArrayList<Courses> prerequisites, String grade) {
-		super (name, symbol, credit, capacity, time, prerequisites);
-		this.grade=grade;
+	public StudentCourse(String name) {
+		this.name=name;
 	  }
-	public void setGrade(String grade) {
-		this.grade=grade;
+	public String getName() {
+		return this.name;
+	}
+	public void setName(String name) {
+		 this.name=name;
 	}
 	public String getGrade() {
 		return this.grade;
 	}
+	public void setGrade(String grade) {
+		 this.grade=grade;
+	}
+	
 }
