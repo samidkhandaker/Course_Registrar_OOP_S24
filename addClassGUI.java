@@ -9,8 +9,8 @@ public class addClassGUI extends JFrame{
 	private JTextField nameField, symbolField, timeField;
     private JComboBox<String> locationComboBox;
     private JSpinner creditsSpinner;
-    private ArrayList<String> prerequisitesname;
-    private ArrayList<Courses> prerequisites;
+    private ArrayList<String> prerequisitesname=new ArrayList<String>();
+    private ArrayList<Courses> prerequisites=new ArrayList<Courses>();
     public Courses newcourse;
 
     public addClassGUI( ArrayList<Courses> courses) {
@@ -56,6 +56,7 @@ public class addClassGUI extends JFrame{
                 int credits = (int) creditsSpinner.getValue();
                 String location = (String) locationComboBox.getSelectedItem();
                 String time = timeField.getText();
+                if(!prerequisitesname.isEmpty()){
                 for(String coursename: prerequisitesname) {
                 	for(Courses precourse: courses) {
                 		if(precourse.getName().equals(coursename)) {
@@ -63,22 +64,12 @@ public class addClassGUI extends JFrame{
                 		}
                 	}
                 }
+            }
                 newcourse=new Courses(name, symbol, credits, location, time, prerequisites);
-                
-                nameField.setText("");
-                symbolField.setText("");
-                timeField.setText("");
-				/*
-				 * System.out.println("Name: " + name); System.out.println("Symbol: " + symbol);
-				 * System.out.println("Credits: " + credits); System.out.println("Location: " +
-				 * location); System.out.println("Time: " + time);
-				 * System.out.println("Prerequisites:"); for (String prerequisite :
-				 * prerequisites) { System.out.println(prerequisite); }
-				 */
+               dispose();
+               
             }
         });
-
-        //prerequisites = new ArrayList<>();
 
         panel.add(nameLabel);
         panel.add(nameField);
