@@ -6,14 +6,14 @@ public class Courses {
 	public String name;
 	public String symbol;
 	public int credit;
-	public int capacity;
+	public String location;
 	public String time;
 	public ArrayList<Courses> prerequisites;
-	public Courses(String name, String symbol, int credit,  int capacity,String time, ArrayList<Courses> prerequisites) {
+	public Courses(String name, String symbol, int credit,  String location,String time, ArrayList<Courses> prerequisites) {
 		  this.name=name;
 		  this.symbol=symbol;
 		  this.credit=credit;
-		  this.capacity=capacity;
+		  this.location=location;
 		  this.time=time;
 		  this.prerequisites=prerequisites;
 	  }
@@ -26,8 +26,8 @@ public class Courses {
 	public void setCredit(int credit) {
 		  this.credit=credit;
 	  }
-	public void setCapcity(int capacity) {
-		  this.capacity=capacity;
+	public void setlocation(String location) {
+		  this.location=location;
 	  }
 	public void setTime(String time) {
 		  this.time=time;
@@ -44,8 +44,8 @@ public class Courses {
 	public int getCredit() {
 		  return this.credit;
 	  }
-	public int getCapcity() {
-		  return this.capacity;
+	public String getLocation() {
+		  return this.location;
 	  }
 	public String getTime() {
 		  return this.time;
