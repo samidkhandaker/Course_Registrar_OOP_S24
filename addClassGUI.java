@@ -70,6 +70,13 @@ public class addClassGUI extends JFrame{
                
             }
         });
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the dialog
+            }
+        });
 
         panel.add(nameLabel);
         panel.add(nameField);
@@ -83,7 +90,7 @@ public class addClassGUI extends JFrame{
         panel.add(timeField);
         panel.add(prerequisitesLabel);
         panel.add(addPrerequisiteButton);
-        panel.add(new JLabel()); // Empty label for spacing
+        panel.add(cancelButton); 
         panel.add(saveButton);
 
         add(panel);
