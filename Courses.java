@@ -6,16 +6,22 @@ public class Courses {
 	public String name;
 	public String symbol;
 	public int credit;
+	public int capacity;
+	public int enrollment;
 	public String location;
 	public String time;
-	public ArrayList<Courses> prerequisites;
+	public ArrayList<Courses> prerequisites=new ArrayList<Courses>();
 	public Courses(String name, String symbol, int credit,  String location,String time, ArrayList<Courses> prerequisites) {
 		  this.name=name;
 		  this.symbol=symbol;
 		  this.credit=credit;
 		  this.location=location;
+		  setCapacity(location);
+		  this.enrollment=0;
 		  this.time=time;
-		  this.prerequisites=prerequisites;
+		  if(prerequisites!=null) {
+		  this.prerequisites=new ArrayList<Courses>(prerequisites);
+		  }
 	  }
 	public void setName(String name) {
 		  this.name=name;
@@ -53,4 +59,48 @@ public class Courses {
 	public ArrayList<Courses> getPrerequisites() {
 		  return this.prerequisites;
 	  }
+	public boolean enroll() {
+		if(enrollment<capacity) {
+			enrollment++;
+			return true;
+		}
+		return false;
+	}
+	public void deenroll() {
+		enrollment--;
+	}
+	public boolean meetRequirments(Student stud) {
+		if(prerequisites==null || prerequisites.isEmpty()) {
+			return true;
+		}
+		ArrayList<StudentCourse> transcript=stud.getCourses();
+		boolean check=false;
+		for(Courses course:prerequisites) {
+			for(StudentCourse studcourse:transcript) {
+				if(course.getName().equals(studcourse.getName())) {
+					check=true;
+					break;
+				}
+			}
+			if(!check) {
+				return false;
+			}
+			check=false;
+		}
+		return true;
+	}
+	private void setCapacity(String location) {
+		if(location.equals("Bobst")) {
+			this.capacity=20;
+		}
+		else if(location.equals("Silver")) {
+			this.capacity=60;
+		}
+		else if(location.equals("Cantor")) {
+			this.capacity=100;
+		}
+		else if(location.equals("Paulson")) {
+			this.capacity=25;
+		}
+	}
 }
