@@ -44,13 +44,20 @@ public class mainGUI extends JFrame implements Serializable{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        idLabel = new JLabel("ID:");
+	idLabel = new JLabel("ID:");
+        idLabel.setBounds(101, 41, 18, 16);
+        
         passwordLabel = new JLabel("Password:");
+        passwordLabel.setBounds(56, 79, 63, 16);
 
         idField = new JTextField(15);
+        idField.setBounds(131, 36, 220, 26);
+        
         passwordField = new JPasswordField(15);
+        passwordField.setBounds(131, 74, 220, 26);
 
         JButton loginButton = new JButton("Login");
+        loginButton.setBounds(159, 124, 79, 29);
         loginButton.addActionListener(e -> {
         	boolean isadmin=false;
         	boolean isstudent=false;
@@ -92,20 +99,24 @@ public class mainGUI extends JFrame implements Serializable{
             }
             
         });
+        getContentPane().setLayout(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 2));
+        panel.setBounds(0, 0, 400, 172);
+        panel.setLayout(null);
         panel.add(idLabel);
         panel.add(idField);
         panel.add(passwordLabel);
         panel.add(passwordField);
-        panel.add(new JLabel()); // empty label for spacing
+        JLabel label = new JLabel();
+        label.setBounds(255, 50, 0, 0);
+        panel.add(label); // empty label for spacing
         panel.add(loginButton);
 
-        add(panel);
+        getContentPane().add(panel);
 
         setVisible(true); 
-       
+		
     }
 	/*
 	 * public void saveData() { try (ObjectOutputStream outputStream = new
