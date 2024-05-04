@@ -3,10 +3,10 @@ package OOPPROJECT;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-public class mainGUI extends JFrame{
-	//private JPanel contentPane;
-	//private JTextField id;
-	//private JTextField password;
+import java.io.*;
+public class mainGUI extends JFrame implements Serializable{
+	protected String id;
+	protected String password;
 	private JTextField idField;
 	private JTextField passwordField;
 	private JLabel idLabel, passwordLabel;
@@ -14,8 +14,22 @@ public class mainGUI extends JFrame{
 	public ArrayList<Student> students=new ArrayList<Student>();
 	public ArrayList<Courses> courses=new ArrayList<Courses>();
 	public mainGUI(){
+		//Runtime.getRuntime().addShutdownHook(new Thread(() -> saveData()));
 		Administrator superadmin=new Administrator("superadmin","0","123");
 		admins.add(superadmin);
+		Student stud1=new Student("1","1","HAPPYA","Freshaman");
+		Student stud2=new Student("2","11","HAPPYFAKE","Senior");
+		students.add(stud1);
+		students.add(stud2);
+		StudentCourse orgo=new StudentCourse("orgo");
+		StudentCourse cs=new StudentCourse("basic");
+		StudentCourse orgo2=new StudentCourse("orgo2");
+		ArrayList<StudentCourse> stucourses=new ArrayList<StudentCourse>();
+		stucourses.add(cs);
+		stucourses.add(orgo);
+		stud1.setCourses(stucourses);
+		stucourses.add(orgo2);
+		stud2.setCourses(stucourses);
 		setTitle("Login");
         setSize(400, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,14 +45,22 @@ public class mainGUI extends JFrame{
         loginButton.addActionListener(e -> {
         	boolean isadmin=false;
         	boolean isstudent=false;
+        	this.id=idField.getText();
+        	this.password=passwordField.getText();
             String id = idField.getText();
             String password = passwordField.getText();
             for(Administrator admin: admins) {
             	if(admin.getID().equals(id)) {
             		if(admin.getPassword().equals(password)) {
             			isadmin=true;
-            			this.dispose();
-            			new adminGUI(courses);
+            			//this.dispose();
+            			adminGUI ad=new adminGUI(id, admins, students, courses);
+            			for(Courses newcourse:ad.newcourses) {
+            				courses.add(newcourse);
+            			}
+            			for(Student newstudent:ad.newstudents) {
+            				students.add(newstudent);
+            			}
             			//ad.show();
             		}
             	}
@@ -71,6 +93,24 @@ public class mainGUI extends JFrame{
 
         add(panel);
 
-        setVisible(true);
+        setVisible(true); 
+       
     }
+	/*
+	 * public void saveData() { try (ObjectOutputStream outputStream = new
+	 * ObjectOutputStream(new FileOutputStream(
+	 * "C:\\Users\\saeed\\eclipse-workspace\\Hello\\src\\OOPPROJECT\\database.bin"))
+	 * ) { outputStream.writeObject(admins); outputStream.writeObject(students);
+	 * outputStream.writeObject(courses); //
+	 * System.out.println("Data saved successfully."); } catch (IOException e) {
+	 * //System.err.println("Error saving data: " + e.getMessage()); } } public void
+	 * loadData() { try (ObjectInputStream inputStream = new ObjectInputStream(new
+	 * FileInputStream(
+	 * "C:\\Users\\saeed\\eclipse-workspace\\Hello\\src\\OOPPROJECT\\database.bin"))
+	 * ) { admins = (ArrayList<Administrator>) inputStream.readObject(); students =
+	 * (ArrayList<Student>) inputStream.readObject(); courses = (ArrayList<Courses>)
+	 * inputStream.readObject(); // System.out.println("Data loaded successfully.");
+	 * } catch (IOException | ClassNotFoundException e) { //
+	 * System.err.println("Error loading data: " + e.getMessage()); } }
+	 */
 }
