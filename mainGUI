@@ -17,7 +17,7 @@ public class mainGUI extends JFrame implements Serializable{
 		//Runtime.getRuntime().addShutdownHook(new Thread(() -> saveData()));
 		Administrator superadmin=new Administrator("superadmin","0","123");
 		admins.add(superadmin);
-		Student stud1=new Student("1","1","HAPPYA","Freshaman");
+		Student stud1=new Student("1","1","HAPPYA","Freshman");
 		Student stud2=new Student("2","11","HAPPYFAKE","Senior");
 		students.add(stud1);
 		students.add(stud2);
