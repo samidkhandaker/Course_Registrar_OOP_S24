@@ -25,71 +25,88 @@ public class Student extends UniversityPersonnel{
 	public ArrayList<StudentCourse> getCourses() {
 		return this.courses;
 	}
+	public void setName(String name) {
+		this.name=name;
+	}
 	public void setYear(String year) {
 		this.year=year;
 	}
 	public void setCourses(ArrayList<StudentCourse>  courses) {
 		this.courses=new ArrayList<StudentCourse>(courses);
 	}
-	public int getGPA(ArrayList<Courses>  courselist) {
-		int totalScore=0;
-		int totalCredits=0;
+	public void addCourse(StudentCourse course) {
+		this.courses.add(course);
+	}
+	public void removeCourse(String coursename) {
+		for(StudentCourse course:courses) {
+			if(course.getName().equals(coursename)) {
+				courses.remove(course);
+				return;
+			}
+		}
+	}
+	public float getGPA() {
+		float totalScore=0;
+		float totalCredits=0;
 		for(StudentCourse course : courses) {
-			for(Courses coursedata:courselist){
-			if(course.getName().equals(coursedata.getName())) {
-			totalCredits+=coursedata.getCredit();
-			if(course.getGrade().equals("A")) {
-				totalScore+=(4*coursedata.getCredit());
+			if(course.getGrade()==null) {
+				continue;
+			}
+			else if(course.getGrade().equals("A")) {
+				totalScore+=(4*course.getCredits());
 			}
 			else if(course.getGrade().equals("A-")) {
-				totalScore+=(3.6666*coursedata.getCredit());
+				totalScore+=(3.6666*course.getCredits());
 			}
 			else if(course.getGrade().equals("B+")) {
-				totalScore+=(3.3333*coursedata.getCredit());
+				totalScore+=(3.3333*course.getCredits());
 			}
 			else if(course.getGrade().equals("B")) {
-				totalScore+=(3*coursedata.getCredit());
+				totalScore+=(3*course.getCredits());
 			}
 			else if(course.getGrade().equals("B-")) {
-				totalScore+=(2.6666*coursedata.getCredit());
+				totalScore+=(2.6666*course.getCredits());
 			}
 			else if(course.getGrade().equals("C+")) {
-				totalScore+=(2.3333*coursedata.getCredit());
+				totalScore+=(2.3333*course.getCredits());
 			}
 			else if(course.getGrade().equals("C")) {
-				totalScore+=(2*coursedata.getCredit());
+				totalScore+=(2*course.getCredits());
 			}
 			else if(course.getGrade().equals("C-")) {
-				totalScore+=(1.6666*coursedata.getCredit());
+				totalScore+=(1.6666*course.getCredits());
 			}
 			else if(course.getGrade().equals("D+")) {
-				totalScore+=(1.3333*coursedata.getCredit());
+				totalScore+=(1.3333*course.getCredits());
 			}
 			else if(course.getGrade().equals("D")) {
-				totalScore+=(1*coursedata.getCredit());
+				totalScore+=(1*course.getCredits());
 			}
 			else if(course.getGrade().equals("D-")) {
-				totalScore+=(0.6666*coursedata.getCredit());
+				totalScore+=(0.6666*course.getCredits());
 			}
 			else if(course.getGrade().equals("F")) {
 				totalScore+=0;
 			}
+			totalCredits+=course.getCredits();
 			}
-			}
-		}
-		int finalGPA=totalScore/totalCredits;
+		float finalGPA=totalScore/totalCredits;
 		return finalGPA;
 	}
-	String getTranscript(ArrayList<Courses>  courselist) {
+	public String getTranscript() {
 		String transcript="";
 		for(StudentCourse course : courses) {
-			for(Courses coursedata:courselist){
-				if(course.getName().equals(coursedata.getName())) {
-			String coursetxt=course.getName()+" "+coursedata.getSymbol()+" "+course.getGrade()+"\n";
+			String coursetxt=course.getName()+" "+course.getSymbol()+" "+course.getGrade()+"\n";
 			transcript+=coursetxt;
 				}
+		return transcript;
+	}
+	public boolean isEnrolled(String name) {
+		for(StudentCourse stud:courses) {
+			if(stud.getName().equals(name)) {
+				return true;
 			}
 		}
-		return transcript;
+		return false;
 	}
 }
