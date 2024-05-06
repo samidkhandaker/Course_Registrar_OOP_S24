@@ -1,70 +1,76 @@
-package OOPPROJECT;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-public class addStudentClassGUI extends JFrame{
-	    public addStudentClassGUI(Student student, ArrayList<Courses> availableCourses) {
-	        setTitle("Add Class");
-	        setSize(400, 200);
-	        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	        setLocationRelativeTo(null);
 
-	        JPanel panel = new JPanel();
-	        panel.setLayout(new GridLayout(3, 2));
+public class addStudentClassGUI extends JFrame {
+	public addStudentClassGUI(Student student, ArrayList<Courses> availableCourses) {
+		setTitle("Add Class");
+		setSize(400, 200);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 
-	        JLabel courseLabel = new JLabel("Choose a course:");
-	        JComboBox<String> courseComboBox = new JComboBox<>();
-	        for (Courses course : availableCourses) {
-	            courseComboBox.addItem(course.getName());
-	        }
+		JPanel panel = new JPanel();
 
-	        JLabel infoLabel = new JLabel();
+		JLabel courseLabel = new JLabel("Choose a course:");
+		courseLabel.setBounds(36, 56, 108, 16);
+		JComboBox<String> courseComboBox = new JComboBox<>();
+		courseComboBox.setBounds(167, 52, 194, 27);
+		for (Courses course : availableCourses) {
+			courseComboBox.addItem(course.getName());
+		}
 
-	        JButton addButton = new JButton("Add Class");
-	        addButton.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                String selectedCourseName = (String) courseComboBox.getSelectedItem();
-	                Courses selectedCourse = null;
-	                for (Courses course : availableCourses) {
-	                    if (course.getName().equals(selectedCourseName)) {
-	                        selectedCourse = course;
-	                        break;
-	                    }
-	                }
+		JLabel infoLabel = new JLabel();
+		infoLabel.setBounds(381, 19, 0, 0);
 
-	                if (selectedCourse != null) {
-	                	if (student.isEnrolled(selectedCourse.getName())) {
-	                        infoLabel.setText("You are already enrolled in " + selectedCourse.getName());
-	                	} else if (!selectedCourse.meetRequirments(student)) {
-	                        infoLabel.setText("You don't meet the prerequisites.");
-	                    } else if (!selectedCourse.enroll()) {
-	                        infoLabel.setText("No more room in this course.");
-	                    } else {
-	                        StudentCourse newcourse=new StudentCourse(selectedCourse.getName(),selectedCourse.getSymbol(),selectedCourse.getCredit());
-	                        student.addCourse(newcourse);
-	                        infoLabel.setText("Enrolled in " + selectedCourse.getName());
-	                    }
-	                }
-	            }
-	        });
+		JButton addButton = new JButton("Add Class");
+		addButton.setBounds(192, 125, 107, 29);
+		addButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selectedCourseName = (String) courseComboBox.getSelectedItem();
+				Courses selectedCourse = null;
+				for (Courses course : availableCourses) {
+					if (course.getName().equals(selectedCourseName)) {
+						selectedCourse = course;
+						break;
+					}
+				}
 
-	        JButton cancelButton = new JButton("Back");
-	        cancelButton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                dispose();
-	            }
-	        });
+				if (selectedCourse != null) {
+					if (student.isEnrolled(selectedCourse.getName())) {
+						infoLabel.setText("You are already enrolled in " + selectedCourse.getName());
+					} else if (!selectedCourse.meetRequirments(student)) {
+						infoLabel.setText("You don't meet the prerequisites.");
+					} else if (!selectedCourse.enroll()) {
+						infoLabel.setText("No more room in this course.");
+					} else {
+						StudentCourse newcourse = new StudentCourse(selectedCourse.getName(),
+								selectedCourse.getSymbol(), selectedCourse.getCredit());
+						student.addCourse(newcourse);
+						infoLabel.setText("Enrolled in " + selectedCourse.getName());
+					}
+				}
+			}
+		});
 
-	        panel.add(courseLabel);
-	        panel.add(courseComboBox);
-	        panel.add(addButton);
-	        panel.add(cancelButton);
-	        panel.add(infoLabel);
+		JButton cancelButton = new JButton("Back");
+		cancelButton.setBounds(109, 125, 75, 29);
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		panel.setLayout(null);
 
-	        add(panel);
-	        setVisible(true);
-}
+		panel.add(courseLabel);
+		panel.add(courseComboBox);
+		panel.add(addButton);
+		panel.add(cancelButton);
+		panel.add(infoLabel);
+
+		getContentPane().add(panel);
+		setVisible(true);
+	}
 }
