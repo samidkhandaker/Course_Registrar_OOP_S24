@@ -1,11 +1,11 @@
-package OOPPROJECT;
 
 public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		mainGUI mg=new mainGUI();
+		mainGUI mg = new mainGUI();
 		mg.show();
+
 	}
 
 }
